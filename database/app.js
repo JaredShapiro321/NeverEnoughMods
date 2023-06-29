@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const { Sequelize, DataTypes } = require('sequelize');
 
 // Connect to the database
@@ -19,46 +20,45 @@ async function testConnection() {
 testConnection();
 
 // Define the model
-const User = sequelize.define('User', {
+const Mod = sequelize.define('Mod', {
   name: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: false
   },
-  email: {
+  url: {
     type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-    validate: {
-      isEmail: true,
-    },
-  },
+    allowNull: false
+  }
 });
 
-User.sync();
+Mod.sync();
 
 // Create the Express app
 const app = express();
 app.use(express.json());
 
+// Enable CORS middleware
+app.use(cors());
+
 // Define the routes
-app.get('/users', async (req, res) => {
+app.get('/mods', async (req, res) => {
   try {
-    const users = await User.findAll();
-    res.json(users);
+    const mods = await Mod.findAll();
+    res.json(mods);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
 
-app.get('/users/:id', async (req, res) => {
+app.get('/mods/:id', async (req, res) => {
   const { id } = req.params;
   try {
-    const user = await User.findByPk(id);
-    if (user) {
-      res.json(user);
+    const mod = await Mod.findByPk(id);
+    if (mod) {
+      res.json(mod);
     } else {
-      res.status(404).json({ error: 'User not found' });
+      res.status(404).json({ error: 'Mod not found' });
     }
   } catch (error) {
     console.error(error);
@@ -66,29 +66,29 @@ app.get('/users/:id', async (req, res) => {
   }
 });
 
-app.post('/users', async (req, res) => {
+app.post('/mods', async (req, res) => {
   const { name, email } = req.body;
   try {
-    const user = await User.create({ name, email });
-    res.json(user);
+    const mod = await Mod.create({ name, email });
+    res.json(mod);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
 
-app.put('/users/:id', async (req, res) => {
+app.put('/mods/:id', async (req, res) => {
   const { id } = req.params;
   const { name, email } = req.body;
   try {
-    const user = await User.findByPk(id);
-    if (user) {
-      user.name = name;
-      user.email = email;
-      await user.save();
-      res.json(user);
+    const mod = await Mod.findByPk(id);
+    if (mod) {
+      mod.name = name;
+      mod.email = email;
+      await mod.save();
+      res.json(mod);
     } else {
-      res.status(404).json({ error: 'User not found' });
+      res.status(404).json({ error: 'Mod not found' });
     }
   } catch (error) {
     console.error(error);
@@ -96,15 +96,15 @@ app.put('/users/:id', async (req, res) => {
   }
 });
 
-app.delete('/users/:id', async (req, res) => {
+app.delete('/mods/:id', async (req, res) => {
   const { id } = req.params;
   try {
-    const user = await User.findByPk(id);
-    if (user) {
-      await user.destroy();
+    const mod = await Mod.findByPk(id);
+    if (mod) {
+      await mod.destroy();
       res.sendStatus(204);
     } else {
-      res.status(404).json({ error: 'User not found' });
+      res.status(404).json({ error: 'Mod not found' });
     }
   } catch (error) {
     console.error(error);
