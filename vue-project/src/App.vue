@@ -12,10 +12,6 @@
     name: 'App',
     components: {
       MyTable
-    },
-    mounted() {
-      // Fetch data when the component is mounted
-      this.$store.myStore.fetchData();
     }
   };
 </script>

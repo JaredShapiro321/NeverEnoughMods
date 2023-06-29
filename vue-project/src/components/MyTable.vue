@@ -8,26 +8,28 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="item in items" :key="item.id">
-        <td>{{ item.id }}</td>
-        <td>{{ item.name }}</td>
-        <td>{{ item.url }}</td>
+      <tr v-for='mod in mods' :key='mod.id'>
+        <td>{{ mod.id }}</td>
+        <td>{{ mod.name }}</td>
+        <td><a :href='mod.url' target='_blank'>{{ mod.url }}</a></td>
       </tr>
     </tbody>
   </table>
 </template>
 
-<script>
-import { useStore } from '../stores/store.js';
+<script setup>
+  import { ref, onMounted } from 'vue';
+  import { storeToRefs } from 'pinia';
+  import { useModsStore } from '../stores/store.js';
+  const store = useModsStore();
 
-export default {
-  name: 'MyTable',
-  setup() {
-    const store = useStore();
+  //const { fetchMods } = store;
 
-    return {
-      items: store.mods
-    };
-  }
-};
+  const { mods } = storeToRefs(store);
+
+  store.fetchMods();
+
+  onMounted(() => {
+    
+  })
 </script>

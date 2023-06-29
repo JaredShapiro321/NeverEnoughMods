@@ -4,7 +4,7 @@ const BASE_URL = 'http://localhost:3000/';
 
 const instance = axios.create({
     baseURL: BASE_URL,
-    timeout: 1000
+    timeout: 100000
 });
 
 export async function getMods() {

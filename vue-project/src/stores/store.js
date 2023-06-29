@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { getMods } from '../services/modsService.js'
 
-export const useStore = defineStore('store', {
+export const useModsStore = defineStore('mods', {
   state: () => ({
     mods: null
   }),
@@ -12,7 +12,6 @@ export const useStore = defineStore('store', {
       } catch (error) {
         console.error('Error fetching mods:', error);
       }
-      console.log(this.mods);
     }
   }
 });
