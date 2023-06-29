@@ -23,8 +23,6 @@
   import { useModsStore } from '../stores/store.js';
   const store = useModsStore();
 
-  //const { fetchMods } = store;
-
   const { mods } = storeToRefs(store);
 
   store.fetchMods();

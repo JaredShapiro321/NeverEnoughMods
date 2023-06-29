@@ -5,16 +5,13 @@ const BASE_URL = "https://modrinth.com/mod/";
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    var params = { facets:[["project_type:mod"]], index: "updated", limit: 100, offset: 0};
+    var params = { facets:[["project_type:mod"]], index: "updated", limit: 10, offset: 0};
   
     const totalMods = await ModrinthService.totalMods();
-    console.log(totalMods);
-
-
-    //console.log(modrinthMods);
+    
     const mods = [];
 
-    for (var j = 0; j < totalMods / params.limit; j++) {
+    for (var j = 0; j < 1/*totalMods / params.limit*/; j++) {
       params.offset = j * params.limit;
       const modrinthMods = await ModrinthService.getMods(params);
 
@@ -29,8 +26,8 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date()
         };
+
         mods.push(newMod); 
-        console.log(name, url);
       }
     }
 
