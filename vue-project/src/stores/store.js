@@ -14,8 +14,5 @@ export const useStore = defineStore('store', {
       }
       console.log(this.mods);
     }
-  },
-  getters: {
-    getMods: state => state.mods
   }
 });
