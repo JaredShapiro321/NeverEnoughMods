@@ -13,6 +13,7 @@ module.exports = {
 
     for (var j = 0; j < 1/*totalMods / params.limit*/; j++) {
       params.offset = j * params.limit;
+      
       const modrinthMods = await ModrinthService.getMods(params);
 
       for (var i = 0; i < modrinthMods.hits.length; i++) {

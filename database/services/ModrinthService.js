@@ -50,7 +50,7 @@ async function getMods(params) {
     
     try {
         const response = await instance.get(SEARCH_URL, config);
-      console.log(response);
+        console.log(response);
 
         return response.data;
     } catch (error) {
