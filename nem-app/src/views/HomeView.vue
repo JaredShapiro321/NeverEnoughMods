@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+import ModsTable from '../components/ModsTable.vue'
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <ModsTable />
   </main>
 </template>
