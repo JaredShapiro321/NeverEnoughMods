@@ -18,16 +18,16 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, onMounted } from 'vue';
+  import { onMounted } from 'vue';
   import { storeToRefs } from 'pinia';
-  import { useModsStore } from '../stores/store';
+  import { useModsStore } from '@/stores/mods';
+
   const store = useModsStore();
 
   const { mods } = storeToRefs(store);
-
-  store.fetchMods();
+  const { fetchMods } = store;
 
   onMounted(() => {
-    
+    fetchMods();
   })
 </script>
