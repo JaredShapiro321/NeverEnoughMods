@@ -77,7 +77,7 @@ app.post('/mods', async (req: Request, res: Response) => {
   }
 });
 
-app.put('/mods/:id', async (req, res) => {
+app.put('/mods/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
   const { name, email } = req.body;
   try {
@@ -96,7 +96,7 @@ app.put('/mods/:id', async (req, res) => {
   }
 });
 
-app.delete('/mods/:id', async (req, res) => {
+app.delete('/mods/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
     const mod = await Mod.findByPk(id);
